@@ -66,14 +66,39 @@ sommePremiersCarre 2;;
 sommePremiersCarre 3;;
 sommePremiersCarre 4;;
 
-*)
+
+let carre x = x*x;;
+let id x = x;;
 let rec sigma f n = 
             match n with 
             | 0 -> f(0)
-            | _ -> (f(n) + sigma(f n-1)) ;;
-            
-let carre x = x*x;;
+            | _ -> (f(n) + sigma f  n-1 );;    
+sigma id 0;;
+sigma id 1;;
 
-sigma(carre 0);;
-sigma(carre 3);;
-sigma(carre 4);;
+
+
+let rond f g = fun x -> g(f x);;
+let inc x = x+1;;
+rond inc inc 10;;
+rond inc inc 13;;
+
+*)
+
+let abs x = 
+  if x < 0. then (x *. -1.)
+  else x;;
+
+let rec newton x y eps = 
+  if abs(y*.y -. x)<eps then y
+  else newton x ((y+.x/.y)/.2.) eps;;
+
+let racine x = 
+  let eps=0.00001
+  in let arret y = abs(y*.y -. x)<=eps
+          and suivant y = ((y+.x/.y)/.2.)
+      in let rec newton y = 
+              if arret y 
+                then y
+                else newton(suivant(y))
+            in newton x;; 
