@@ -17,9 +17,10 @@ let rec mult x l =
 		| e::r -> (x::[e])::(mult x r);;
 (*
 let rec sous_listes n l =
-	match l with
-		| [] -> []
-		| x::r -> (mult x r)@(sous_listes n r);;
+	match n,l with
+		0,_ -> [[]]
+		| _,[] -> []
+		| n,x::r -> (inserer_tete x (sous_listes (n-1) r))@(sous_listes n r);;
 
 		sous_listes 3 [1; 2; 3; 4];;*)
 	
