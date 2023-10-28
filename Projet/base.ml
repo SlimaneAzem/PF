@@ -1,8 +1,3 @@
-let puzzle1 = ([0;1;2;3;4;5;6;7;8], 3) ;;
-let grille1 = fst puzzle1;;
-let puzzle2 = ([1;4;2;3;0;5;6;7;8], 3);;
-let grille2 = fst puzzle2;;
-
 (* Position d'un entier dans une liste *)
 let rec position grille x = 
   match grille with
@@ -49,20 +44,15 @@ let nouvelle_position tailleGrille oldPos direction =
   | Gauche -> (oldPos - 1)
   | Droite -> (oldPos + 1);;
 
+(* 
+Deplace le 0 dans une grille selon une direction (on check si deplacemeent possible)
+
+Si deplacement possible alors on deplace 
+Sinon On retourne la grille
+*)
 let deplacer puzzle direction = 
   let (grille, tailleGrille) = puzzle
   in let position_0 = (position grille 0)
       in if (deplacement_possible position_0 tailleGrille direction) then let valeur_nouvelle_case = (valeur grille (nouvelle_position tailleGrille position_0 direction))
                                                                           in (echange grille 0 valeur_nouvelle_case)
-                                                                    else grille;;
-      
-let test_unaire_deplacer resultat test = 
-  if resultat=test then "good Shit"
-                    else "No good shit";;
-
-(* test_unaire_deplacer [1; 2; 3; 4; 5; 0; 6; 7; 8] (deplacer ([1;2;3;4;0;5;6;7;8],3) Droite);;
-test_unaire_deplacer [1; 2; 3; 4; 7; 5; 6; 0; 8] (deplacer ([1;2;3;4;0;5;6;7;8],3) Bas);;
-test_unaire_deplacer [1; 2; 3; 0; 4; 5; 6; 7; 8] (deplacer ([1;2;3;4;0;5;6;7;8],3) Gauche);;
-test_unaire_deplacer [1; 0; 3; 4; 2; 5; 6; 7; 8] (deplacer ([1;2;3;4;0;5;6;7;8],3) Haut);;
-
-test_unaire_deplacer [0; 1; 2; 3; 4; 5; 6; 7; 8] (deplacer ([0;1;2;3;4;5;6;7;8],3) Gauche);; *)
+                                                                    else grille;; 
