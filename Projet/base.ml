@@ -19,7 +19,7 @@ let rec modifier_valeur_indice grille p v =
   | (x::r, n) -> if n = 0 then v::r 
                           else x::(modifier_valeur_indice r (p-1) v);;
 
-(* echange les valeur dans deux lilstes *)
+(* echange les valeur dans une grille *)
 let echange grille v1 v2 = 
   let position_v1 = (position grille v1) and position_v2 = position grille v2
   in let traitement_v1 = modifier_valeur_indice grille position_v1 v2

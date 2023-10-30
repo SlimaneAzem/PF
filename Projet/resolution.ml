@@ -31,7 +31,7 @@ let rec parcours1 grille_finale taille prochaines_grilles =
   (* Si la prochaine grille est la bonne alors on retourne son chemin *)
   | (grille, chemin)::r -> if grille=grille_finale
                             then chemin
-                              (* Sinon on rajoute toutes les grilles attengnables en un mouvement 
+                              (* Sinon on rajoute toutes les grilles atteingnables en un mouvement 
                               a partir de la premiere a la fin de prochaines_grilles et on rappelle *)
                             else (parcours1 grille_finale
                                             taille 
@@ -118,7 +118,7 @@ let liste_grilles_proches (grilleInit, chemin) grille_finale taille =
     | (grille, chemin, distance) :: r -> let (g, c, d)=elt in  if d <= distance then elt :: l else (grille, chemin, distance) :: insert elt r;;
     
 (* 
-  Verifie si une grillea ete parcourue  (presentes dans une list de (grille, chemin, distance))
+  Verifie si une grille a ete parcourue  (presentes dans une list de (grille, chemin, distance))
    (vu que dans parcours3 grille_parcourues=(int list*direction list*int) List.mem n'est pas utilisable)
 *)
 let rec grille_parcourue grille liste_grilles = 
@@ -167,10 +167,3 @@ match parcours with
   | 2 -> (parcours2 grille_finale taille [(grille_init, [])] [])
   | 3 -> (parcours3 grille_finale taille [(grille_init, [], (distance grille_init grille_finale taille))] [])
   | _ -> [];;
-
-let grille_finale = [0;1;2;3;4;5;6;7;8;9;10;11;12;13;14;15];;
-let grille_init = [10;12;4;5;9;14;8;3;0;11;6;15;13;7;2;1];;
-
-let chemin = resoudre grille_init grille_finale 4 3 ;;
-
-(grille_finale) = (testerChemin (grille_init, 4) chemin);;
